@@ -3,17 +3,7 @@ import {
     DELETE_TODO,
     TOGGLE_TODO_COMPLETED
 } from '../actions/todoActionCreator';
-
-export class Todo {
-    constructor(text, completed = false) {
-        this._text = text;
-        this._completed = completed;
-    }
-
-    toggleTodoCompleted(){
-        this._completed = true;
-    }
-}
+import Todo from '../models/Todo';
 
 export const todoReducer = (state = [], action) => {
     switch (action.type) {

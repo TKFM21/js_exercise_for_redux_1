@@ -1,4 +1,5 @@
-import { todoReducer, Todo } from '../../reducers/todoReducer';
+import { todoReducer } from '../../reducers/todoReducer';
+import Todo from '../../models/Todo';
 import { 
     addTodo,
     deleteTodo,
