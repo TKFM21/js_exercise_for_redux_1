@@ -1,13 +1,11 @@
-import {
-    ADD_TODO,
-    DELETE_TODO,
-    TOGGLE_TODO_COMPLETED
-} from './constants';
+export const ADD_TODO = 'ADD_TODO';
+export const DELETE_TODO = 'DELETE_TODO';
+export const TOGGLE_TODO_COMPLETED = 'TOGGLE_TODO_COMPLETED';
 
-export const addTodo = (todo) => {
+export const addTodo = (text) => {
     return {
         type: ADD_TODO,
-        todo
+        text
     };
 };
 
