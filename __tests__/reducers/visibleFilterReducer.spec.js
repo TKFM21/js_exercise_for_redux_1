@@ -2,52 +2,50 @@ import { visibleFilterReducer } from '../../reducers/visibleFilterReducer';
 import {
     showAll,
     showActive,
-    showCompleted
+    showCompleted,
+    SHOW_ALL,
+    SHOW_ACTIVE,
+    SHOW_COMPLETED
 } from '../../actions/visibleFilterActionCreator';
-import { Todo } from '../../reducers/todoReducer';
 
 describe('reducers/visibleFilterReducer TEST', () => {
     describe('SHOW_ALL', () => {
-        it('todosがそのままreturn', () => {
-            const initialCompleted = [false, false, true, false, true];
-            const initialTodos = [1, 2, 3, 4, 5].map( (num, index) => {
-                return new Todo('dummy' + num, initialCompleted[index]);
-            });
+        it('SHOW_ALLがreturn', () => {
             const action = showAll();
-            const newTodos = visibleFilterReducer(initialTodos, action);
-            expect( Array.isArray(newTodos) ).toStrictEqual(true);
-            expect( newTodos.length ).toStrictEqual(5);
-            expect( newTodos ).toStrictEqual(initialTodos);
+            const newState = visibleFilterReducer(SHOW_ALL, action);
+            expect( newState ).toStrictEqual(SHOW_ALL);
         });
     });
     describe('SHOW_ACTIVE', () => {
-        it('todosの_completedがfalseのものがreturn', () => {
-            const initialCompleted = [false, false, true, false, true];
-            const initialTodos = [1, 2, 3, 4, 5].map( (num, index) => {
-                return new Todo('dummy' + num, initialCompleted[index]);
-            });
+        it('SHOW_ACTIVEがreturn', () => {
             const action = showActive();
-            const newTodos = visibleFilterReducer(initialTodos, action);
-            expect( Array.isArray(newTodos) ).toStrictEqual(true);
-            expect( newTodos.length ).toStrictEqual(3);
-            newTodos.forEach( todo => {
-                expect( todo._completed ).toStrictEqual(false);
-            });
+            const newState = visibleFilterReducer(SHOW_ACTIVE, action);
+            expect( newState ).toStrictEqual(SHOW_ACTIVE);
         });
     });
     describe('SHOW_COMPLETED', () => {
-        it('todosの_completedがtrueのものがreturn', () => {
-            const initialCompleted = [false, false, true, false, true];
-            const initialTodos = [1, 2, 3, 4, 5].map( (num, index) => {
-                return new Todo('dummy' + num, initialCompleted[index]);
-            });
+        it('SHOW_COMPLETEDがreturn', () => {
             const action = showCompleted();
-            const newTodos = visibleFilterReducer(initialTodos, action);
-            expect( Array.isArray(newTodos) ).toStrictEqual(true);
-            expect( newTodos.length ).toStrictEqual(2);
-            newTodos.forEach( todo => {
-                expect( todo._completed ).toStrictEqual(true);
-            });
+            const newState = visibleFilterReducer(SHOW_COMPLETED, action);
+            expect( newState ).toStrictEqual(SHOW_COMPLETED);
+        });
+    });
+    describe('引数:stateなし、不正action', () => {
+        it('SHOW_ALLがreturn', () => {
+            const action = {
+                type: 'dummy'
+            };
+            const newState = visibleFilterReducer(undefined, action);
+            expect( newState ).toStrictEqual(SHOW_ALL);
+        });
+    });
+    describe('引数:オリジナルstate、不正action', () => {
+        it('SHOW_ALLがreturn', () => {
+            const action = {
+                type: 'dummy'
+            };
+            const newState = visibleFilterReducer('original', action);
+            expect( newState ).toStrictEqual(SHOW_ALL);
         });
     });
 });

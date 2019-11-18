@@ -4,15 +4,15 @@ import {
     SHOW_COMPLETED
 } from '../actions/visibleFilterActionCreator';
 
-export const visibleFilterReducer = (todos = [], action) => {
+export const visibleFilterReducer = (state = SHOW_ALL, action) => {
     switch (action.type) {
         case SHOW_ALL:
-            return todos;
+            return SHOW_ALL;
         case SHOW_ACTIVE:
-            return todos.filter( todo => !todo._completed );
+            return SHOW_ACTIVE;
         case SHOW_COMPLETED:
-            return todos.filter( todo => todo._completed );
+            return SHOW_COMPLETED;
         default:
-            return todos;
+            return SHOW_ALL;
     }
 };

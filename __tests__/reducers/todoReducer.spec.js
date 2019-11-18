@@ -5,6 +5,13 @@ import {
     toggleTodoCompleted
 } from '../../actions/todoActionCreator';
 
+const dummyArrayCreate = () => {
+    return [1, 2, 3].map( num => {
+        const dummy = 'dummy' + num;
+        return new Todo(dummy);
+    });
+};
+
 describe('reducers/todoReducer TEST', () => {
     describe('ADD_TODO', () => {
         it('addTodoアクションを渡すと配列にそのアクションに準じたTodoインスタンスが追加される', () => {
@@ -21,10 +28,7 @@ describe('reducers/todoReducer TEST', () => {
     });
     describe('DELETE_TODO', () => {
         it('deleteTodoアクションを渡すとそのアクションに準じたTodoインスタンスが削除される', () => {
-            const initialState = [1, 2, 3].map( num => {
-                const dummy = 'dummy' + num;
-                return new Todo(dummy);
-            });
+            const initialState = dummyArrayCreate();
             const index = 2;
             const action = deleteTodo(index);
             const newState = todoReducer(initialState, action);
@@ -37,10 +41,7 @@ describe('reducers/todoReducer TEST', () => {
     });
     describe('TOGGLE_TODO_COMPLETED', () => {
         it('toggleTodoCompletedアクションを渡すと指定されたTodoインスタンスのcompletedがtrueになる', () => {
-            const initialState = [1, 2, 3].map( num => {
-                const dummy = 'dummy' + num;
-                return new Todo(dummy);
-            });
+            const initialState = dummyArrayCreate();
             const expectCompletedProp = [false, false, true];
             const index = 2;
             const action = toggleTodoCompleted(index);
